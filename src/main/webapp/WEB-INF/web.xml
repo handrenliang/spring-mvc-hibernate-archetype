@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<display-name>Archetype Created Web Application</display-name>
+
+	<context-param>
+		<description>declare the basename of localization resources</description>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+		<param-value>ApplicationResources</param-value>
+	</context-param>
+
+	<context-param>
+		<description>if no resource match browser's local then use zh_CN</description>
+		<param-name>javax.servlet.jsp.jstl.fmt.fallbackLocal</param-name>
+		<param-value>zh_CN</param-value>
+	</context-param>
+
+	<context-param>
+		<description>load spring configuration files on startup</description>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring/*.xml /WEB-INF/spring-mvc-dispatcher-servlet.xml</param-value>
+	</context-param>
+
+	<context-param>
+		<description>jmesa.properties configuration</description>
+		<param-name>jmesaPreferencesLocation</param-name>
+		<param-value>WEB-INF/jmesa.properties</param-value>
+	</context-param>
+
+	<filter>
+		<description>locale and encoding filter, default is zh_CN and utf-8</description>
+		<filter-name>localeEncodingFilter</filter-name>
+		<filter-class>com.joinme.icook.filter.LocaleAndEncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>localeEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<description>make sure you have this configuration, if not, xml and rss will be not encoded right with Chinese</description>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<description>lazy loading filter</description>
+		<filter-name>lazyLoadingFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>sessionFactoryBeanName</param-name>
+			<param-value>sessionFactory</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>lazyLoadingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<description>sitemesh filter</description>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
+
+	<servlet>
+		<description>spring mvc dispatcher servlet</description>
+		<servlet-name>spring-mvc-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>spring-mvc-dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+</web-app>

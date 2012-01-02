@@ -1,0 +1,12 @@
+<decorators defaultdir="/WEB-INF/decorators">
+	<excludes>
+		<!-- which will not be decorated by sitemesh -->
+		<pattern>*.json</pattern>
+		<pattern>*.xml</pattern>
+		<pattern>*.rss</pattern>
+	</excludes>
+	
+	<decorator name="main" page="main.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+</decorators>

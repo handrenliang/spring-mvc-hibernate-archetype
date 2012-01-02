@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="project" default="default" basedir=".">
+	<target name="default" description="description">
+        <exec dir="." executable="E:\apache-maven-3.0.3\bin\mvn.bat">
+        	<arg value="package"/>
+        </exec>
+    </target>
+</project>

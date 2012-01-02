@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.joinme.icook.foodcategory.model">
+	<class name="FoodCategory" table="FOOD_CATEGORY">
+		<id name="categoryId" column="CATEGORY_ID" type="java.lang.Long"
+			length="10">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="categoryName" column="CATEGORY_NAME" type="java.lang.String"
+			length="80" />
+		<property name="categoryDescription" column="CATEGORY_DESCRIPTION"
+			type="java.lang.String" />
+	</class>
+</hibernate-mapping>
